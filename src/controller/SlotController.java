@@ -1,5 +1,6 @@
 package controller;
 
+import language.Language;
 import model.SlotModel;
 import view.SlotView;
 
@@ -10,10 +11,25 @@ import java.awt.event.ActionListener;
 public class SlotController implements ActionListener {
     SlotModel model;
     SlotView view;
+    Language language;
 
     public SlotController(SlotModel model, SlotView view) {
         this.model = model;
         this.view = view;
+        this.model.setLanguage("es");
+        this.language=this.model.getLang();
+
+        this.view.setTitle(language.getTitle());
+        this.view.btnPlay.setText(language.getBtnPlay());
+        this.view.btnRestart.setText(language.getBtnRestart());
+        this.view.lblCredit.setText(language.getLblCredit());
+        this.view.lblPrice.setText(language.getLblPrice());
+
+        this.view.btnPlay.setSize(this.view.btnPlay.getPreferredSize());
+        this.view.btnRestart.setSize(this.view.btnRestart.getPreferredSize());
+        this.view.lblCredit.setSize(this.view.lblCredit.getPreferredSize());
+        this.view.lblPrice.setSize(this.view.lblPrice.getPreferredSize());
+
         this.view.lblImg1.setIcon(this.model.getListImages().get(1));
         this.view.lblImg2.setIcon(this.model.getListImages().get(2));
         this.view.lblImg3.setIcon(this.model.getListImages().get(3));
@@ -34,8 +50,8 @@ public class SlotController implements ActionListener {
     public void restart() {
         this.view.btnPlay.setEnabled(true);
         this.view.btnRestart.setEnabled(false);
-        this.view.lblCredit.setText("Crédito: 10");
-        this.model.setCredito(10);
+        this.view.lblCredit.setText(language.getLblCredit());
+        this.model.setCredit(10);
     }
 
     @Override
@@ -53,13 +69,13 @@ public class SlotController implements ActionListener {
             this.view.lblImg1.setIcon(this.model.getListImages().get(ArrayRandomNumbers[0]));
             this.view.lblImg2.setIcon(this.model.getListImages().get(ArrayRandomNumbers[1]));
             this.view.lblImg3.setIcon(this.model.getListImages().get(ArrayRandomNumbers[2]));
-            this.model.costoPartida();
-            boolean premio = this.model.premioPartida();
-            this.view.lblColor.setText(premio ? "Ganas" : "Pierdes");
-            this.view.lblColor.setSize(this.view.lblColor.getPreferredSize());
-            this.view.lblCredit.setText("Crédito: "+ this.model.getCredito());
+            this.model.costGame();
+            boolean price = this.model.priceGame();
+            this.view.lblPrice.setText(price ? language.getWin() : language.getLost());
+            this.view.lblPrice.setSize(this.view.lblPrice.getPreferredSize());
+            this.view.lblCredit.setText(language.getCredit()+ this.model.getCredit());
             this.view.lblCredit.setSize(this.view.lblCredit.getPreferredSize());
-            if (this.model.getCredito() < 1) {
+            if (this.model.getCredit() < 1) {
                 this.view.btnPlay.setEnabled(false);
                 this.view.btnRestart.setEnabled(true);
             }

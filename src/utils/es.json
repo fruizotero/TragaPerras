@@ -1,0 +1,14 @@
+{
+  "btnPlay": "Jugar",
+  "lblCredit": "Crédito: 10",
+  "lblPrice": "Info",
+  "btnRestart": "Volver a jugar",
+  "title": "Título",
+  "win": "Ganas",
+  "lost": "Pierdes",
+  "credit":"Crédito: ",
+  "file": "Archivo",
+  "language": "Idioma",
+  "spanish": "Español",
+  "english":"Inglés"
+}

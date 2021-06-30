@@ -18,16 +18,6 @@ public class SlotView extends JFrame {
         lblImg1.setText("");
         lblImg2.setText("");
         lblImg3.setText("");
-        btnPlay.setText("Jugar");
-        btnPlay.setSize(btnPlay.getPreferredSize());
-        btnRestart.setText("Jugar otra vez");
-        btnRestart.setSize(btnRestart.getPreferredSize());
-        lblCredit.setText("Crédito: 10");
-        lblCredit.setSize(lblCredit.getPreferredSize());
-        lblColor.setText("");
-        lblColor.setText("Info");
-        lblColor.setSize(lblColor.getPreferredSize());
-
 
     }
 
@@ -36,13 +26,15 @@ public class SlotView extends JFrame {
         // Generated using JFormDesigner Evaluation license - unknown
         menuBar2 = new JMenuBar();
         menu1 = new JMenu();
+        menu2 = new JMenu();
+        menuItem2 = new JMenuItem();
         menuItem1 = new JMenuItem();
         lblImg1 = new JLabel();
         lblImg2 = new JLabel();
         lblImg3 = new JLabel();
         btnPlay = new JButton();
         lblCredit = new JLabel();
-        lblColor = new JLabel();
+        lblPrice = new JLabel();
         btnRestart = new JButton();
 
         //======== this ========
@@ -56,9 +48,19 @@ public class SlotView extends JFrame {
             {
                 menu1.setText("text");
 
-                //---- menuItem1 ----
-                menuItem1.setText("text");
-                menu1.add(menuItem1);
+                //======== menu2 ========
+                {
+                    menu2.setText("text");
+
+                    //---- menuItem2 ----
+                    menuItem2.setText("text");
+                    menu2.add(menuItem2);
+
+                    //---- menuItem1 ----
+                    menuItem1.setText("text");
+                    menu2.add(menuItem1);
+                }
+                menu1.add(menu2);
             }
             menuBar2.add(menu1);
         }
@@ -89,10 +91,10 @@ public class SlotView extends JFrame {
         contentPane.add(lblCredit);
         lblCredit.setBounds(350, 10, 100, lblCredit.getPreferredSize().height);
 
-        //---- lblColor ----
-        lblColor.setText("text");
-        contentPane.add(lblColor);
-        lblColor.setBounds(new Rectangle(new Point(150, 200), lblColor.getPreferredSize()));
+        //---- lblPrice ----
+        lblPrice.setText("text");
+        contentPane.add(lblPrice);
+        lblPrice.setBounds(new Rectangle(new Point(150, 200), lblPrice.getPreferredSize()));
 
         //---- btnRestart ----
         btnRestart.setText("text");
@@ -121,14 +123,16 @@ public class SlotView extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     // Generated using JFormDesigner Evaluation license - unknown
     private JMenuBar menuBar2;
-    private JMenu menu1;
-    private JMenuItem menuItem1;
+    public JMenu menu1;
+    public JMenu menu2;
+    public JMenuItem menuItem2;
+    public JMenuItem menuItem1;
     public JLabel lblImg1;
     public JLabel lblImg2;
     public JLabel lblImg3;
     public JButton btnPlay;
     public JLabel lblCredit;
-    public JLabel lblColor;
+    public JLabel lblPrice;
     public JButton btnRestart;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

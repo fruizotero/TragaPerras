@@ -1,33 +1,44 @@
 package model;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import language.Language;
+
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Scanner;
 
 public class SlotModel {
 
     private ArrayList<ImageIcon> listImages;
     private int[] slotRandomNumbers;
-    private double credito;
+    private double credit;
+    private Language lang;
 
+    public Language getLang() {
+        return lang;
+    }
 
     public SlotModel() {
         listImages = new ArrayList<ImageIcon>();
         imgs();
         slotRandomNumbers = new int[3];
-        this.credito = 10;
+        this.credit = 10;
     }
 
     public int[] getSlotRandomNumbers() {
         return slotRandomNumbers;
     }
 
-    public double getCredito() {
-        return credito;
+    public double getCredit() {
+        return credit;
     }
 
-    public void setCredito(double credito) {
-        this.credito = credito;
+    public void setCredit(double credit) {
+        this.credit = credit;
     }
 
     private void imgs() {
@@ -56,34 +67,49 @@ public class SlotModel {
 
     }
 
-    public void costoPartida() {
-        this.credito--;
+    public void costGame() {
+        this.credit--;
     }
 
-    public boolean premioPartida() {
+    public boolean priceGame() {
 
-        double premio = 0;
-        int contador = 0;
+        double price = 0;
+        int counter = 0;
         int num1 = slotRandomNumbers[0];
         int num2 = slotRandomNumbers[1];
         int num3 = slotRandomNumbers[2];
-        boolean banderaPremio = false;
+        boolean flagPrice = false;
 
         if (num2 == num3 && num1 == num3) {
-            contador = 2;
+            counter = 2;
         } else {
             if (num1 == num2 || num2 == num3 || num1 == num3) {
-                contador = 1;
+                counter = 1;
             }
         }
 
-        if (contador != 0) {
-            premio = contador == 1 ? 1.5 : 5;
-            setCredito(getCredito() + premio);
-            banderaPremio = true;
+        if (counter != 0) {
+            price = counter == 1 ? 1.5 : 5;
+            setCredit(getCredit() + price);
+            flagPrice = true;
         }
 
-        return banderaPremio;
+        return flagPrice;
+    }
+
+    public void setLanguage(String language) {
+        String stringLanguage = "";
+        ObjectMapper mapper = new ObjectMapper();
+
+        try (Scanner sc = new Scanner(new File(String.format("src/utils/%s.json", language)))) {
+            while (sc.hasNext()) {
+                stringLanguage += sc.nextLine();
+            }
+            Map<String, String> languageMap = mapper.readValue(stringLanguage, Map.class);
+            lang = new Language(languageMap);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
